@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontorsskärm Fullskärm</title>
+    <title>Kontorsskärm Minimal</title>
     <style>
         /* Nollställning */
         * {
@@ -14,33 +14,23 @@
         }
 
         body {
-            /* Bilden är borttagen, använder nu en mörkgrå/svart bakgrund */
-            background-color: #000; 
+            background-color: #121212; 
             height: 100vh;
             width: 100vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0px; /* Din padding på 50px */
+            /* Behåller 50px marginal till skärmens kant */
+            padding: 50px; 
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             overflow: hidden;
+            color: white;
         }
 
-        .glass-panel {
-            background: rgba(40, 40, 40, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            
-            /* Gör att boxen fyller utrymmet men aldrig blir större än skärmen */
+        /* En osynlig container som håller ihop allt mitt på skärmen */
+        .content-wrapper {
             width: 100%;
             height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            
             display: flex;
             flex-direction: column;
             justify-content: center; 
@@ -49,46 +39,41 @@
         }
 
         #date {
-            /* Clamp(min, önskad, max) - hindrar texten från att bli gigantisk eller minimal */
-            font-size: clamp(1rem, 2.5vw, 2.5rem);
+            font-size: clamp(1rem, 2.5vw, 2rem);
             color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
             letter-spacing: 4px;
             margin-bottom: 10px;
-            max-width: 100%;
         }
 
         #clock {
-            /* Clamp gör att klockan skalar perfekt och stannar inom bordern */
-            font-size: clamp(3rem, 12vw, 12rem); 
+            /* Responsiv storlek som aldrig blir för stor för fönstret */
+            font-size: clamp(3rem, 15vw, 15rem); 
             font-weight: 800;
-            color: #ffffff;
             line-height: 1;
             margin-bottom: 30px;
             font-variant-numeric: tabular-nums;
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 100%;
-            word-wrap: break-word;
         }
 
+        /* Strecket mellan klocka och väder */
         .separator {
             height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            width: 60%;
+            background: rgba(255, 255, 255, 0.2); /* Något tydligare streck nu utan panel */
+            width: clamp(200px, 50%, 800px); /* Strecket krymper också med skärmen */
             margin-bottom: 30px;
         }
 
         .weather-container {
             width: 100%;
-            max-width: 100%;
-            /* Förhindrar att widgeten trycker ut boxen */
+            max-width: 600px;
             overflow: hidden; 
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-panel">
+    <div class="content-wrapper">
         <div id="date">Laddar datum...</div>
         <div id="clock">00:00:00</div>
         
