@@ -1,1 +1,26 @@
-<iframe src="https://calendar.google.com/calendar/embed?src=emilia.cvjeticanin%40visma.com&ctz=Europe%2FBerlin" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: black; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: flex-start; padding: 5vw; }
+        #clock { font-size: 10vw; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="clock">00:00</div>
+
+    <a class="weatherwidget-io" href="https://forecast7.com/sv/59d3318d07/stockholm/" data-label_1="STOCKHOLM" data-label_2="VÄDER" data-theme="pure" >STOCKHOLM VÄDER</a>
+    <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
+
+    <script>
+        function update() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'});
+        }
+        setInterval(update, 1000); update();
+    </script>
+</body>
+</html>
