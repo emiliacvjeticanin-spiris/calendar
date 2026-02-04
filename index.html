@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontorsskärm Dashboard</title>
+    <title>Kontorsskärm Fullskärm</title>
     <style>
-        /* Globala inställningar */
+        /* Nollställer allt och tar bort vita kanter */
         * {
             margin: 0;
             padding: 0;
@@ -14,188 +14,33 @@
         }
 
         body {
-            /* Din bakgrundsbild från Figma */
+            /* Din Figma-bakgrundsbild */
             background: url('Ram till skärmarna Test.png') no-repeat center center fixed;
             background-size: cover;
-            background-color: #1a1a1a; /* Fallback */
+            background-color: #1a1a1a;
             height: 100vh;
             width: 100vw;
-            display: grid;
-            /* Layout med CSS Grid */
-            grid-template-columns: 1fr 500px; /* En stor kolumn, en mindre för klocka/sidospel */
-            grid-template-rows: auto 1fr auto; /* Övre, mitten, nedre */
-            gap: 40px; /* Avstånd mellan rutorna */
-            padding: 40px; /* Luft runt hela layouten */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px; /* 50px luft till skärmens kant */
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             overflow: hidden;
         }
 
-        /* Stilen för alla "glass-paneler" */
         .glass-panel {
-            background: rgba(30, 30, 30, 0.85); /* Lätt genomskinlig mörkgrå */
-            backdrop-filter: blur(15px); /* Sudda bakgrunden */
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(30, 30, 30, 0.8); /* Genomskinlig mörk yta */
+            backdrop-filter: blur(20px); /* Suddar bakgrunden snyggt */
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-radius: 30px; /* Rundade hörn */
+            padding: 60px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            
+            /* Gör att boxen fyller ut hela det tillgängliga utrymmet */
+            width: 100%;
+            height: 100%;
+            
             display: flex;
             flex-direction: column;
-            color: white; /* Standard textfärg */
-            overflow: hidden; /* Viktigt för bildspelen */
-        }
-
-        /* Specifik layout för klockan */
-        .clock-panel {
-            grid-column: 2 / 3; /* Placerar i andra kolumnen (höger) */
-            grid-row: 1 / 2;    /* Placerar i första raden (uppe) */
-            padding: 35px;
-            align-self: start; /* Fäster den i toppen */
-        }
-
-        #date {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        #clock {
-            font-size: 5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .separator {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        .weather-container {
-            min-height: 100px;
-        }
-
-        /* Huvud-bildspel i mitten/vänster */
-        .main-slideshow-panel {
-            grid-column: 1 / 2; /* Första kolumnen (vänster) */
-            grid-row: 1 / 3;    /* Sträcker sig över två rader */
-            /* Stil för bildspel: Bakgrundsbild från din server/system */
-            background-image: url('path/till/ditt/huvudbildspel/bild1.jpg'); /* Exempelbild */
-            background-size: cover;
-            background-position: center;
-            /* Lägg till transitions i JS för bildbyte */
-        }
-
-        /* Sid-bildspel under klockan */
-        .side-slideshow-panel {
-            grid-column: 2 / 3; /* Andra kolumnen (höger) */
-            grid-row: 2 / 3;    /* Andra raden (mitten) */
-            min-height: 300px; /* Minsta höjd för bildspel */
-            /* Bakgrundsbild för bildspel 2 */
-            background-image: url('path/till/ditt/sidbildspel/bild1.jpg'); /* Exempelbild */
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Logotyp i nedre högra hörnet */
-        .logo-container {
-            grid-column: 2 / 3; /* Andra kolumnen (höger) */
-            grid-row: 3 / 4;    /* Tredje raden (botten) */
-            align-self: end;    /* Fäster den i botten */
-            justify-self: end;  /* Fäster den i höger */
-            padding: 20px; /* Luft runt loggan */
-        }
-
-        .logo-container img {
-            max-width: 150px; /* Max bredd för logotypen */
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* Liten skugga på loggan */
-        }
-    </style>
-</head>
-<body>
-
-    <div class="glass-panel clock-panel">
-        <div id="date">Laddar...</div>
-        <div id="clock">00:00:00</div>
-        <div class="separator"></div>
-        <div class="weather-container">
-            <a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" 
-               data-label_1="VÄXJÖ" data-font="Arial" data-mode="Current" 
-               data-days="3" data-accent="#ffffff" data-textcolor="#ffffff" 
-               data-highcolor="#ffffff" data-lowcolor="#ffffff" data-suncolor="#ffffff" 
-               data-mooncolor="#ffffff" data-cloudcolor="#ffffff" data-cloudfill="#ffffff" 
-               data-raincolor="#ffffff" data-snowcolor="#ffffff">VÄXJÖ</a>
-        </div>
-    </div>
-
-    <div class="glass-panel main-slideshow-panel">
-        </div>
-
-    <div class="glass-panel side-slideshow-panel">
-        </div>
-
-    <div class="logo-container">
-        <img src="path/till/din/logotyp.png" alt="Företagslogotyp">
-    </div>
-
-    <script>
-        // Klocka & Datum-funktion
-        function updateAll() {
-            const now = new Date();
-            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-            let d = now.toLocaleDateString('sv-SE', dateOptions);
-            document.getElementById('date').textContent = d.toUpperCase();
-
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-        }
-        setInterval(updateAll, 1000);
-        updateAll();
-
-        // Väder-script
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-    
-        // ---- Bildspelslogik (MÅSTE JUSTERAS AV DIG) ----
-        // För att detta ska fungera behöver du en lista med bilder på din GitHub eller en server
-        // och sedan JavaScript som byter ut dem.
-        
-        // Exempel på hur det skulle kunna se ut (anpassa sökvägar och tid)
-        const mainSlideshowImages = [
-            'path/till/ditt/huvudbildspel/bild1.jpg',
-            'path/till/ditt/huvudbildspel/bild2.jpg',
-            'path/till/ditt/huvudbildspel/bild3.jpg'
-        ];
-        const sideSlideshowImages = [
-            'path/till/ditt/sidbildspel/bild1.jpg',
-            'path/till/ditt/sidbildspel/bild2.jpg',
-            'path/till/ditt/sidbildspel/bild3.jpg'
-        ];
-
-        let currentMainImage = 0;
-        let currentSideImage = 0;
-
-        function updateMainSlideshow() {
-            document.querySelector('.main-slideshow-panel').style.backgroundImage = `url('${mainSlideshowImages[currentMainImage]}')`;
-            currentMainImage = (currentMainImage + 1) % mainSlideshowImages.length;
-        }
-
-        function updateSideSlideshow() {
-            document.querySelector('.side-slideshow-panel').style.backgroundImage = `url('${sideSlideshowImages[currentSideImage]}')`;
-            currentSideImage = (currentSideImage + 1) % sideSlideshowImages.length;
-        }
-
-        // Starta bildspelen (byt bild var 5:e sekund)
-        // setInterval(updateMainSlideshow, 5000);
-        // setInterval(updateSideSlideshow, 5000);
-        // updateMainSlideshow(); // Visa första bilden direkt
-        // updateSideSlideshow(); // Visa första bilden direkt
-    </script>
-</body>
-</html>
+            justify-content: center; /* Centrerar klockan vertikalt in
