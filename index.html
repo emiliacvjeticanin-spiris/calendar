@@ -1,4 +1,113 @@
-<a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" data-label_1="VÄXJÖ" data-font="Arial" data-mode="Current" data-days="3" data-theme="pure" >VÄXJÖ</a>
-<script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-</script>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontorsskärm Premium</title>
+    <style>
+        /* 1. Grundinställningar - tar bort alla ränder */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            /* Här lägger du in din bild från Figma */
+            background: url('din-figma-bild.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #1a1a1a; /* Fallback färg */
+            height: 100vh;
+            display: flex;
+            align-items: center; /* Centrerar boxen vertikalt */
+            padding-left: 10%; /* Flyttar boxen till vänster enligt bildexempel */
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* 2. Glassmorphism-boxen (den genomskinliga plattan) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05); /* Väldigt svag vit färg */
+            backdrop-filter: blur(15px); /* Detta gör bakgrunden suddig */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            display: inline-block;
+            min-width: 450px;
+        }
+
+        /* 3. Text-styling */
+        #date {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        #clock {
+            font-size: 5rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 30px;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* 4. Väder-sektionen */
+        .weather-container {
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Linjen under klockan */
+            padding-top: 20px;
+            width: 100%;
+        }
+
+        /* Döljer eventuella fula ramar i widgeten */
+        .weatherwidget-io {
+            background: transparent !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-panel">
+        <div id="date">Laddar datum...</div>
+        <div id="clock">00:00:00</div>
+        
+        <div class="weather-container">
+            <a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" 
+               data-label_1="VÄXJÖ" 
+               data-font="Arial" 
+               data-mode="Current" 
+               data-theme="pure" 
+               data-textcolor="#ffffff">VÄXJÖ</a>
+        </div>
+    </div>
+
+    <script>
+        function updateAll() {
+            const now = new Date();
+            
+            // Uppdatera datum
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
+            let d = now.toLocaleDateString('sv-SE', dateOptions);
+            document.getElementById('date').textContent = d.charAt(0).toUpperCase() + d.slice(1);
+
+            // Uppdatera klocka
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+
+        setInterval(updateAll, 1000);
+        updateAll();
+
+        // Väder-script
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
+</body>
+</html>
