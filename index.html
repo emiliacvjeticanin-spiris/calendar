@@ -13,20 +13,22 @@
         }
 
         body {
-            /* Se till att filnamnet matchar din uppladdade bild exakt */
-            background: url('Ram till skärmarna Test.png') no-repeat center center fixed;
-            background-size: cover;
-            background-color: #1a1a1a;
-            height: 100vh;
+            
+            /* Positionering av boxen */
             display: flex;
-            align-items: center; 
-            padding-left: 10%;
+            justify-content: flex-start; /* Flyttar innehållet till HÖGER */
+            align-items: flex-start;    /* Flyttar innehållet UPP */
+            
+            /* Avstånd från kanterna (justera dessa om du vill ha den mer/mindre centrerad i hörnet) */
+            padding-top: 50px; 
+            padding-right: 50px;
+            
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             overflow: hidden;
         }
 
         .glass-panel {
-            background: rgba(30, 30, 30, 0.85); /* Lite mörkare för att matcha din bild */
+            background: rgba(30, 30, 30, 0.85); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -35,8 +37,8 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
-            width: 500px; /* Fast bredd för stabilitet */
-            height: auto; /* Låter boxen växa med innehållet */
+            width: 500px; 
+            height: auto; 
         }
 
         #date {
@@ -56,7 +58,6 @@
             font-variant-numeric: tabular-nums;
         }
 
-        /* Linjen mellan klocka och väder */
         .separator {
             height: 1px;
             background: rgba(255, 255, 255, 0.1);
@@ -65,7 +66,8 @@
         }
 
         .weather-container {
-
+            /* Säkerställer att vädret får plats */
+            min-height: 100px;
         }
     </style>
 </head>
@@ -78,7 +80,21 @@
         <div class="separator"></div>
 
         <div class="weather-container">
-<a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" data-label_1="VÄXJÖ" data-font="Arial" data-mode="Current" data-days="3" data-accent="#ffffff" data-textcolor="#ffffff" data-highcolor="#ffffff" data-lowcolor="#ffffff" data-suncolor="#ffffff" data-mooncolor="#ffffff" data-cloudcolor="#ffffff" data-cloudfill="#ffffff" data-raincolor="#ffffff" data-snowcolor="#ffffff" >VÄXJÖ</a>
+            <a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" 
+               data-label_1="VÄXJÖ" 
+               data-font="Arial" 
+               data-mode="Current" 
+               data-days="3" 
+               data-accent="#ffffff" 
+               data-textcolor="#ffffff" 
+               data-highcolor="#ffffff" 
+               data-lowcolor="#ffffff" 
+               data-suncolor="#ffffff" 
+               data-mooncolor="#ffffff" 
+               data-cloudcolor="#ffffff" 
+               data-cloudfill="#ffffff" 
+               data-raincolor="#ffffff" 
+               data-snowcolor="#ffffff">VÄXJÖ</a>
         </div>
     </div>
 
