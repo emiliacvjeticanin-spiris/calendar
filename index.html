@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontorsskärm Premium</title>
     <style>
-        /* 1. Grundinställningar - tar bort alla ränder */
         * {
             margin: 0;
             padding: 0;
@@ -14,69 +13,71 @@
         }
 
         body {
-            /* Här lägger du in din bild från Figma */
-            background: url('din-figma-bild.jpg') no-repeat center center fixed;
+            /* Se till att filnamnet matchar din uppladdade bild exakt */
+            background: url('Ram till skärmarna Test.png') no-repeat center center fixed;
             background-size: cover;
-            background-color: #1a1a1a; /* Fallback färg */
+            background-color: #1a1a1a;
             height: 100vh;
             display: flex;
-            align-items: center; /* Centrerar boxen vertikalt */
-            padding-left: 10%; /* Flyttar boxen till vänster enligt bildexempel */
+            align-items: center; 
+            padding-left: 10%;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             overflow: hidden;
         }
 
-        /* 2. Glassmorphism-boxen (den genomskinliga plattan) */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.05); /* Väldigt svag vit färg */
-            backdrop-filter: blur(15px); /* Detta gör bakgrunden suddig */
+            background: rgba(30, 30, 30, 0.85); /* Lite mörkare för att matcha din bild */
+            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-            display: inline-block;
-            min-width: 450px;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            width: 500px; /* Fast bredd för stabilitet */
+            height: auto; /* Låter boxen växa med innehållet */
         }
 
-        /* 3. Text-styling */
         #date {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         #clock {
-            font-size: 5rem;
-            font-weight: 800;
+            font-size: 6rem;
+            font-weight: 700;
             color: #ffffff;
-            line-height: 1;
-            margin-bottom: 30px;
+            line-height: 1.1;
+            margin-bottom: 20px;
             font-variant-numeric: tabular-nums;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* 4. Väder-sektionen */
-        .weather-container {
-            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Linjen under klockan */
-            padding-top: 20px;
+        /* Linjen mellan klocka och väder */
+        .separator {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
             width: 100%;
+            margin-bottom: 20px;
         }
 
-        /* Döljer eventuella fula ramar i widgeten */
-        .weatherwidget-io {
-            background: transparent !important;
+        .weather-container {
+            width: 100%;
+            min-height: 150px; /* Ger plats åt väderappen */
         }
     </style>
 </head>
 <body>
 
     <div class="glass-panel">
-        <div id="date">Laddar datum...</div>
+        <div id="date">Laddar...</div>
         <div id="clock">00:00:00</div>
         
+        <div class="separator"></div>
+
         <div class="weather-container">
             <a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" 
                data-label_1="VÄXJÖ" 
@@ -90,13 +91,10 @@
     <script>
         function updateAll() {
             const now = new Date();
-            
-            // Uppdatera datum
             const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
             let d = now.toLocaleDateString('sv-SE', dateOptions);
-            document.getElementById('date').textContent = d.charAt(0).toUpperCase() + d.slice(1);
+            document.getElementById('date').textContent = d.toUpperCase();
 
-            // Uppdatera klocka
             const h = String(now.getHours()).padStart(2, '0');
             const m = String(now.getMinutes()).padStart(2, '0');
             const s = String(now.getSeconds()).padStart(2, '0');
@@ -106,7 +104,6 @@
         setInterval(updateAll, 1000);
         updateAll();
 
-        // Väder-script
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
     </script>
 </body>
