@@ -2,16 +2,77 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontorsskärm - Växjö</title>
+    <style>
+        body {
+            background-color: #000; /* Svart bakgrund för infoskärm */
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Justerar allt till vänster */
+        }
 
+        #clock {
+            font-size: 12vw; /* Storlek baserad på skärmbredd */
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 20px;
+            font-variant-numeric: tabular-nums; /* Hindrar siffror från att "hoppa" */
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
 
+        .weather-wrapper {
+            width: 100%;
+            max-width: 600px; /* Begränsar bredden på väder-widgeten */
+        }
+    </style>
 </head>
 <body>
 
-<div class="weather-container">
-<a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" data-label_1="VÄXJÖ" data-font="Arial" data-mode="Current" data-shadow="#000000" data-accent="#ffffff" data-textcolor="#ffffff" data-highcolor="#ffffff" data-lowcolor="#ffffff" data-suncolor="#ffffff" data-mooncolor="#ffffff" data-cloudcolor="#ffffff" data-cloudfill="#ffffff" data-raincolor="#ffffff" data-snowcolor="#ffffff" >VÄXJÖ</a>
-<script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-</script>
+    <div id="clock">00:00:00</div>
+
+    <div class="weather-wrapper">
+        <a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" 
+           data-label_1="VÄXJÖ" 
+           data-font="Arial" 
+           data-mode="Current" 
+           data-shadow="#000000" 
+           data-accent="#ffffff" 
+           data-textcolor="#ffffff" 
+           data-highcolor="#ffffff" 
+           data-lowcolor="#ffffff" 
+           data-suncolor="#ffffff" 
+           data-mooncolor="#ffffff" 
+           data-cloudcolor="#ffffff" 
+           data-cloudfill="#ffffff" 
+           data-raincolor="#ffffff" 
+           data-snowcolor="#ffffff">VÄXJÖ</a>
+    </div>
+
+    <script>
+        // Funktion för att uppdatera klockan
+        function updateClock() {
+            const now = new Date();
+            
+            // Hämtar timmar, minuter och sekunder
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+
+        // Starta klockan
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Väder-widgetens eget script
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
 
 </body>
 </html>
