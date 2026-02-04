@@ -43,4 +43,81 @@
             
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centrerar klockan vertikalt in
+            justify-content: center; /* Centrerar klockan vertikalt inuti boxen */
+            align-items: center;     /* Centrerar klockan horisontellt inuti boxen */
+            text-align: center;
+        }
+
+        #date {
+            font-size: 2.5vw; /* Skalar med skärmstorleken */
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        #clock {
+            font-size: 15vw; /* Riktigt stor och tydlig klocka */
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 40px;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .separator {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60%; /* Linjen täcker 60% av boxens bredd */
+            margin-bottom: 40px;
+        }
+
+        .weather-container {
+            width: 100%;
+            max-width: 800px; /* Begränsar väderappen så den inte blir för bred */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-panel">
+        <div id="date">Laddar datum...</div>
+        <div id="clock">00:00:00</div>
+        
+        <div class="separator"></div>
+
+        <div class="weather-container">
+            <a class="weatherwidget-io" href="https://forecast7.com/sv/56d8814d81/vaxjo/" 
+               data-label_1="VÄXJÖ" 
+               data-font="Arial" 
+               data-mode="Current" 
+               data-theme="pure" 
+               data-textcolor="#ffffff">VÄXJÖ</a>
+        </div>
+    </div>
+
+    <script>
+        function updateAll() {
+            const now = new Date();
+            
+            // Uppdatera datum
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
+            let d = now.toLocaleDateString('sv-SE', dateOptions);
+            document.getElementById('date').textContent = d.toUpperCase();
+
+            // Uppdatera klocka
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+
+        setInterval(updateAll, 1000);
+        updateAll();
+
+        // Väder-script
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
+</body>
+</html>
